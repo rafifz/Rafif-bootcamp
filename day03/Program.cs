@@ -1,2 +1,2 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("day 3 changed!");
+Console.WriteLine("day 3 change!");
