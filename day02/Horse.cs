@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using Animal;
+namespace Horses;
 class Horse : Animals
 {
 	public string gender;

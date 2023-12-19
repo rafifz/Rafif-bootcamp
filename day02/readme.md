@@ -1,7 +1,9 @@
 creating class
 creating class in diff file
 creating method
-construction class
+constructor class
 parameter method
 this. return value
 create and using namespace
+inheritance, passing variable and method from parent
+inherit class constructor to child class

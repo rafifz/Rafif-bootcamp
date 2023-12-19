@@ -1,5 +1,6 @@
 ﻿using Humans;
-using Animal;
+using Horses;
+using Dogs;
 internal class Program
 {
 	private static void Main(string[] args)
