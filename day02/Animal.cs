@@ -12,6 +12,6 @@ public class Animals
 	
 	public void Eat(string food)
 	{
-		System.Console.WriteLine($"eating {food}");
+		System.Console.WriteLine($"{this.name} is eating {food}");
 	}
 }

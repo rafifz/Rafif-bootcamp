@@ -3,11 +3,13 @@ using System.Runtime.CompilerServices;
 using Animal;
 class Horse : Animals
 {
-	public Horse (string name, int age)
+	public string gender;
+	public Horse (string name, int age, string gender) : base(name, age)
 	{
-		 
+	 this.gender = gender;	
 	}
-	public void kick(string food)
+	
+	public void Kick()
 	{
 		System.Console.WriteLine("horse is kicking");
 	}

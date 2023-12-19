@@ -8,9 +8,9 @@ class Human
 		this.name = name ;
 		this.age = age ;
 	}
-	public void Punch(string name, int age)
+	public void Punch()
 	{
-		System.Console.WriteLine($"{name}, {age} years old, is punching kids");
+		System.Console.WriteLine($"{this.name}, {this.age} years old, is punching kids");
 	}
 	public int SumOfDmg(params int[] damages) //array of param with 1 type of data
 	{
