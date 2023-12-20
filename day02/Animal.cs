@@ -9,6 +9,7 @@ public class Animals
 		this.name = name;
 		this.age = age;
 	}
+	public Animals(){}
 	
 	public void Eat(string food)
 	{

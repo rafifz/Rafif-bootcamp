@@ -5,7 +5,7 @@ namespace Horses;
 class Horse : Animals
 {
 	public string gender;
-	public Horse (string name, int age, string gender) : base(name, age)
+	public Horse (string name, int age, string gender)
 	{
 	 this.gender = gender;	
 	}
