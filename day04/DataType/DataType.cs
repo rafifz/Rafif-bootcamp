@@ -6,11 +6,12 @@ internal class Program
 	private static void Main(string[] args)
 	{
 		int iteration = 100000;
-		string a = string.Empty;
 		Stopwatch sw = new Stopwatch();
+		
 		
 		//string is immutable reference type, when assigned its create new allocate memory, so will take a long time
 		/*
+		string a = string.Empty;
 		sw.Start();
 		for (int i = 0; i < iteration; i++)
 		{
@@ -37,19 +38,18 @@ internal class Program
 		System.Console.WriteLine($"it takes {sw.ElapsedMilliseconds} miliseconds");
 		
 		//example of value type
-		System.Console.WriteLine("console value");
+		System.Console.WriteLine("value type");
 		int x = 5;
 		Adder(x);
 		System.Console.WriteLine(x); //will return 5 
 		
 		int u = 5;
 		u = Adder(u);
-		System.Console.WriteLine(u); //will return 8
+		System.Console.WriteLine(u); //will return 300
 		
-		//=======================
 		
 		//example of reference type
-		System.Console.WriteLine("console reference");
+		System.Console.WriteLine("reference type");
 		Car small = new(5);
 		Car big = small;
 		big.price = 10;
@@ -60,7 +60,7 @@ internal class Program
 	
 	public static int Adder(int a)
 	{
-		return  a += 3;
+		return  a = 300;
 	}
 	
 }
