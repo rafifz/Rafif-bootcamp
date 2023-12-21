@@ -9,8 +9,8 @@ internal class Program
 		Parent parent = new();
 		Child child = new();
 		child.callProtected();
-		parent.VirtualOverride();
-		child.VirtualOverride();
+		parent.VirtualOverride(); //original method
+		child.VirtualOverride();  //overrided by child class
 	}
 class Parent
 	{
@@ -40,7 +40,8 @@ class Child : Parent
 		}
 		public void callPrivate()
 		{
-		//	Private();     ---will return error because Parent.Private() is private
+		//	_Private();     
+		//will return error because Parent._Private() is private
 		}
 		
 		public override void VirtualOverride()
