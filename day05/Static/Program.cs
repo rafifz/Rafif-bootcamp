@@ -3,7 +3,7 @@
 	private static void Main(string[] args)
 	{
 		
-		System.Console.WriteLine(Static.Count()); // static method doesnt need object, becase the value belong to its class
+		System.Console.WriteLine(Static.Count()); // static method doesnt need object
 		System.Console.WriteLine(Static.Count());
 		System.Console.WriteLine(Static.Count());
 		Static test = new Static();
