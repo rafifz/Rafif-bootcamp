@@ -1,13 +1,12 @@
 ﻿using System;
 public class Program
 {
-	public delegate int Delegate (int x, int y);
+	public delegate int MyDelegate (int x, int y);
 	public static void Main(string[] args)
 	{
-		Delegate myDelegate = Plus;
+		MyDelegate myDelegate = Add;
 		myDelegate += Multiply;
-		int result = myDelegate(5, 5);
-		int[] myResult = new int[2];
+		int result = myDelegate(5, 5);;
 		Console.WriteLine("5, 5 = " + result);
 	}
 
@@ -15,7 +14,7 @@ public class Program
 	{
 		return x * y;
 	}
-	public static int Plus(int x, int y)
+	public static int Add(int x, int y)
 	{
 		return x + y;
 	}
