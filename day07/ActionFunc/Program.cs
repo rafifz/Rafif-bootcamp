@@ -1,62 +1,50 @@
-﻿using System;
-
-class Youtuber {
-    public Action < object, MyEventArgs > ? mySubscriber;
-    public string Name {
-        get;
+class Youtuber
+{
+    public string Name{get; set;}
+    public event Action<string, string> notification;
+    
+    public void UploadVideo()
+    {
+        Console.WriteLine($"{Name} is Uploading ...");
+        Console.WriteLine($"{Name} is Finished Uploading");
+        SendNotif("New Video Is Out");
     }
-    public Youtuber(string name) {
-        Name = name;
-    }
-    public void UPloadVideo() {
-        Console.WriteLine("Uploading Video...");
-        Console.WriteLine("Finished.");
-        SendNotification();
-    }
-    public void SendNotification() {
-        mySubscriber ? .Invoke(this, new MyEventArgs());
-    }
-    public override string ToString() {
-        return "youtuber : " + Name;
-    }
-}
-class Publisher {
-    public Action < object, MyEventArgs > ? mySubscriber;
-    public string Name {
-        get;
-    }
-    public Publisher(string name) {
-        Name = name;
-    }
-    public void SendNotification() {
-        mySubscriber ? .Invoke(this, new MyEventArgs());
-    }
-    public override string ToString() {
-        return "publisher : " + Name;
-    }
-
-}
-class MyEventArgs {
-    public string data = null!;
-}
-
-class Subscriber {
-    public void GetNotification(object sender, MyEventArgs e) {
-        Console.WriteLine("Subscriber get notified by " + sender);
+    public void SendNotif(string message)
+    {
+        notification?.Invoke(Name, message);
     }
 }
 
-class Program {
-    static void Main() {
-        Subscriber sub1 = new Subscriber();
-        Subscriber sub2 = new Subscriber();
+class Publisher
+{
+    public string Name{get;set;}
+    public event Action<string, string> notification;
+    
+    public void SendNotif(string message)
+    {
+        notification?.Invoke(Name, message);
+    }
+}
 
-        Youtuber achmed = new Youtuber("achmed");
-        achmed.mySubscriber += sub1.GetNotification;
-        achmed.UPloadVideo();
+class Subscriber
+{
+    public string Name{get;set;}
+    public void GetNotif(string name, string message)
+    {
+        Console.WriteLine($"{Name} get notif from {name} : {message}");
+    }
+}
 
-        Publisher hoho = new Publisher("hoho");
-        hoho.mySubscriber += sub1.GetNotification;
-        hoho.SendNotification();
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        Youtuber jhon = new Youtuber {Name="Jhon"};
+        Publisher doe = new Publisher {Name="Doe"};
+        Subscriber bocil = new() {Name = "Bocil"};
+        jhon.notification += bocil.GetNotif;
+        doe.notification += bocil.GetNotif;
+        jhon.UploadVideo();
+        doe.SendNotif("JJK vol.5 is out");
     }
 }
