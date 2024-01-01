@@ -1,75 +1,62 @@
-﻿//? => null checking
-//? => boleh null boleh tidak
-//! => tidak mungkin null
-class Youtuber 
+using System;
+
+public delegate void EventHandler(object sender, EventArgs e);
+
+public class NotificationEventArgs : EventArgs
 {
-	public event EventHandler <MyEventArgs>? mySubscriber;
-	public string Name  {get;}
-	public Youtuber (string name)
-	{
-		Name = name;
-	}
-	public void UPloadVideo()
-	{
-		Console.WriteLine("Uploading Video...");
-		Console.WriteLine("Finished.");
-		SendNotification();
-	}
-	public void SendNotification()
-	{
-		mySubscriber?.Invoke(this, new MyEventArgs());
-	}
-	public override string ToString()
-	{
-		return "youtuber : " + Name;
-	}
+    public string Name { get; set; }
+    public string Message { get; set; }
+
+    public NotificationEventArgs(string name, string message)
+    {
+        Name = name;
+        Message = message;
+    }
 }
+
+class Youtuber
+{
+    public string Name { get; set; }
+    public event EventHandler<NotificationEventArgs> Notification;
+
+    public void UploadVideo()
+    {
+        Console.WriteLine($"{Name} is Uploading ...");
+        Console.WriteLine($"{Name} is Finished Uploading");
+        Notification?.Invoke(this, new NotificationEventArgs(Name, "New Video Is Out"));
+    }
+}
+
 class Publisher
 {
-	public event EventHandler <MyEventArgs>? mySubscriber;
-	public string Name {get;}
-	public Publisher (string name)
-	{
-		Name = name;
-	}
-	public void SendNotification()
-	{
-		mySubscriber?.Invoke(this,new MyEventArgs()
-		 {data = " "}
-		);
-	}
-	public override string ToString()
-	{
-		return "publisher : " + Name;
-	}
-	
-}
-class MyEventArgs : EventArgs 
-{
-	public string data = null!;
-}
+    public string Name { get; set; }
+    public event EventHandler<NotificationEventArgs> Notification;
 
+    public void SendNotification(string message)
+    {
+        Notification?.Invoke(this, new NotificationEventArgs(Name, message));
+    }
+}
 class Subscriber
 {
-	public void GetNotification(object sender, MyEventArgs e)
-	{
-		Console.WriteLine("Subscriber get notified by " + sender + e.data);
-	}
+    public string Name { get; set; }
+
+    public void GetNotification(object sender, NotificationEventArgs e)
+    {
+        Console.WriteLine($"{Name} get notification from {e.Name} : {e.Message}");
+    }
 }
 
-class Program
+public class Program
 {
-	static void Main()
-	{
-		Subscriber sub1 = new Subscriber();
-		Subscriber sub2 = new Subscriber();
-		
-		Youtuber achmed = new Youtuber("achmed");
-		achmed.mySubscriber += sub1.GetNotification;
-		achmed.UPloadVideo();
-		
-		Publisher hoho = new Publisher("hoho");
-		hoho.mySubscriber += sub1.GetNotification;
-		hoho.SendNotification();
-	}
+    public static void Main(string[] args)
+    {
+        Youtuber jhon = new Youtuber {Name="Jhon"};
+        Publisher doe = new Publisher {Name="Doe"};
+        Subscriber bocil = new() {Name = "Bocil"};
+        jhon.Notification += bocil.GetNotification;
+        doe.Notification += bocil.GetNotification;
+        jhon.UploadVideo();
+        doe.SendNotification("JJK vol.5 is out");
+    }
 }
