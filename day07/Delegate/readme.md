@@ -1,72 +1,58 @@
- # YouTube Notification System in C#
+# YouTube Notification System
 
-This code demonstrates a simple YouTube notification system using delegates and events. It includes a `Youtuber` class that manages subscribers and sends notifications, and a `Subscriber` class that receives notifications.
+This code demonstrates a simple notification system for a YouTube-like platform. It involves three main classes: `Youtuber`, `Publisher`, and `Subscriber`. Let's break down the code step by step:
 
-## Step-by-Step Explanation
-
-### 1. Defining the Delegate
-
-First, we define a delegate called `MySubscriber` that represents the method signature for the notification callback. This delegate takes a single string parameter, which is the notification message.
+## 1. Defining the `Notification` Delegate:
 
 ```csharp
-public delegate void MySubcriber (string message);
+public delegate void Notification(string name, string message);
 ```
 
-### 2. The `Youtuber` Class
+- We define a delegate called `Notification` that takes two string parameters: `name` and `message`. This delegate represents the signature of the notification method that will be used to send notifications.
 
-The `Youtuber` class represents the YouTube channel. It has a private field called `mySubscriber` that stores a reference to the delegate.
+## 2. `Youtuber` Class:
 
 ```csharp
-class Youtuber 
+class Youtuber
 {
-	private event MySubcriber mySubscriber;
+    public string Name { get; set; }
+    public event Notification notification;
+
+    public void UploadVideo()
+    {
+        Console.WriteLine($"{Name} is Uploading ...");
+        Console.WriteLine($"{Name} is Finished Uploading");
+        SendNotif("New Video Is Out");
+    }
+
+    public void SendNotif(string message)
+    {
+        notification(Name, message);
+    }
+}
 ```
 
-### 3. Adding Subscribers
+- The `Youtuber` class represents a YouTuber who can upload videos and send notifications to subscribers.
+- It has a `Name` property to store the YouTuber's name.
+- It defines an event called `notification` of type `Notification` delegate. This event will be used to notify subscribers when a new video is uploaded.
+- The `UploadVideo` method simulates the process of uploading a video. It prints messages to the console indicating the upload process and then calls the `SendNotif` method to send a notification.
+- The `SendNotif` method takes a `message` as an argument and invokes the `notification` event, passing the YouTuber's name and the message as arguments.
 
-The `AddSubscriber` method allows subscribers to register for notifications. It checks if there is already a subscriber registered, and if not, it adds the new subscriber to the `mySubscriber` delegate.
+## 3. `Publisher` Class:
 
 ```csharp
-	public bool AddSubscriber (MySubcriber sub)
-	{
-		if (mySubscriber is null)
-		{
-			mySubscriber += sub;
-			return true;
-		}
-		if (mySubscriber.GetInvocationList().Contains(sub))
-		{
-			return false;
-		}
-		mySubscriber += sub;
-		return true;
-	}
+class Publisher
+{
+    public string Name { get; set; }
+    public event Notification notification;
+
+    public void SendNotif(string message)
+    {
+        notification(Name, message);
+    }
+}
 ```
 
-### 4. Uploading a Video
-
-The `UPloadVideo` method simulates the process of uploading a video to YouTube. It sends a notification to all registered subscribers when the upload is complete.
-
-```csharp
-	public void UPloadVideo()
-	{
-		Console.WriteLine("Uploading Video...");
-		Console.WriteLine("Finished.");
-		SendNotification("Here is my new video");
-	}
-```
-
-### 5. Sending Notifications
-
-The `SendNotification` method invokes the `mySubscriber` delegate, which in turn calls the `GetNotification` method of each registered subscriber.
-
-```csharp
-	public void SendNotification(string message)
-	{
-		mySubscriber.Invoke(message);
-	}
-```
-
-### 6. The `Subscriber` Class
-
-The `Subscriber` class represents a YouTube user who subscribes to a channel. It has a single method called `GetNotification`,
+- The `Publisher` class represents a publisher who can send notifications to subscribers.
+- It has a `Name` property to store the publisher's name.
+- It defines an event called `notification` of type `Notification` delegate. This event will be used to notify subscribers when a new publication is available.
