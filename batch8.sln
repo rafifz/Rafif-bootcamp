@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugLogicError", "day17\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "day17\Benchmark\Benchmark.csproj", "{8FEDBF83-7297-4880-91C7-022DECA71422}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchMarkPR", "BenchMarkPR\BenchMarkPR.csproj", "{B0CF254C-B947-4438-957D-CB9CB7512388}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -204,6 +206,10 @@ Global
 		{8FEDBF83-7297-4880-91C7-022DECA71422}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FEDBF83-7297-4880-91C7-022DECA71422}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FEDBF83-7297-4880-91C7-022DECA71422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0CF254C-B947-4438-957D-CB9CB7512388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0CF254C-B947-4438-957D-CB9CB7512388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0CF254C-B947-4438-957D-CB9CB7512388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0CF254C-B947-4438-957D-CB9CB7512388}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{663AD5FC-B539-4278-B9BE-54EBEF512F4B} = {BC0D724A-3B15-4E9C-9509-0F14047E0311}
